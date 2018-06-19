@@ -1,0 +1,58 @@
+.jumbotron {
+    padding-bottom: 32px;
+    }
+
+#trainpic {
+    height: 200px;
+    width: 400px;
+}
+
+#trainpicdiv {
+    float: left;
+    align-content: center;
+}
+
+#titlediv {
+    float: left;
+}
+
+#heading {
+    background-color: rgb(138, 31, 31);
+    text-align: center;
+    padding: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: white;
+    font-size: xx-large;
+    border-top-color: grey;
+    border-top-style: solid;
+    border-top-width: 30px;
+}
+
+#input {
+    border: 2pt;
+    border-style: solid;
+    border-color: rgb(126, 123, 123);
+}
+
+#schedule {
+    border: 2pt;
+    border-style: solid;
+    border-color: rgb(126, 123, 123);
+}
+
+#input-header {
+    background-color: grey;
+    margin-bottom: 10px;
+    font-size: larger;
+    padding: 4px;
+    color: white;
+}
+
+.btn {
+    background-color: grey;
+    color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-color: gray;
+}
