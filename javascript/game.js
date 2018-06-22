@@ -1,6 +1,7 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
-  console.log("ready!");
+    $("#tbody").empty();
+   console.log("ready!");
 
 
   // Initialize Firebase
@@ -39,28 +40,44 @@ $(document).ready(function () {
     console.log(destination);
     console.log(firstTrainTime);
     console.log(frequency);
+    
 
     // Code for the push
     dataRef.ref().push({
 
       trainName: trainName,
       destination: destination,
-      firsttraintime: firstTrainTime,
+      firstTrainTime: firstTrainTime,
       frequency: frequency,
-      dateAdded: firebase.database.ServerValue.TIMESTAMP
+      
     });
   });
   dataRef.ref().on("child_added", function (childSnapshot) {
-    $("tbody").append("<tr><td>" + childSnapshot.val().trainName + "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().firstTrainTime + "</td><td>" + childSnapshot.val().frequency + "</td></tr>");
+    var snap = childSnapshot.val()
+   
+   var tFirstTrain = childSnapshot.val().firstTrainTime;
+   var timeArr = tFirstTrain.split(":");
+   var trainTime = moment().hours(timeArr[0]).minutes(timeArr[1]);
+   var currentTime = moment();
+
+   var minsAway = currentTime.diff(trainTime, "minutes")
+   var freqNum = parseInt(snap.frequency.split(' ')[0])
+   console.log(freqNum, typeof freqNum)
+   var remainder = minsAway % (freqNum)
+   var minsArrival = freqNum - remainder
+   var nextArrivalTime = moment().add(minsArrival).format("HH:mm")
+   console.log(freqNum - remainder);
+
+   $("tbody").append(
+    "<tr><td>" + snap.trainName + 
+    "</td><td>" + snap.destination + 
+    "</td><td>" + snap.frequency + 
+    "</td><td>" + nextArrivalTime + 
+    "</td><td>" + minsArrival +
+    "</td></tr>"
+    );
+                      
+   
   });
 
-
 });
-
-// {/* <tr>
-//                     <th id="tn1" scope="row"></th>
-//                     <td id="dstn1"></td>
-//                     <td id="freq1"></td>
-//                     <td id="na1"></td>
-//                     <td id="mq1"></td>
-//                 </tr> */}
